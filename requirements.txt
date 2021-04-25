@@ -5,4 +5,4 @@ plotly==4.14.3
 streamlit==0.78.0
 wordcloud==1.8.1
 nltk==3.5
-sympy ==1.0.3
+sympy ==1.8
