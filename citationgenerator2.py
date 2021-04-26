@@ -216,4 +216,17 @@ st.write("The answer is " , v4)
 # projMat = np.dot(aMatrix,answer)
 # st.write(projMat)
 
+st.header("Diagonaliser")
 
+
+
+test1 = st.text_input("Please enter the matrix 4", value=[[5,-2,-4],[-2,8,-2],[-4,-2,5]])
+
+test1 = json.loads(test1)
+# vector5 = np.array(vector5).astype(np.float64)
+
+A = Matrix(test1)
+
+p=A.charpoly().as_expr()
+# factor(p)
+st.write(factor(p))
