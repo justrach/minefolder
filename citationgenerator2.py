@@ -3,6 +3,8 @@ from sympy import *
 from sympy import * 
 import json
 import numpy as np
+from sympy.printing.str import StrPrinter
+from scipy.linalg import null_space
 st.title('MA1508E Algebric Simplifier')
 
 number_input_1 = st.text_input("Please enter the text that you would wish to simplify",value="x")
@@ -161,12 +163,12 @@ st.write("Bottom Fraction/Matrix", matrixDotProduct1)
 
 # v2 = (matrix2 - (matrix1.T * matrix1)*matrix2*(np.linalg.inv(matrix1.T*matrix1)*matrix1))
 # st.write(v2)
-st.write("V1 = ",matrix2)
+st.write("V2 = ",matrix2)
 
 fractionMain = matrixDotProductTop / matrixDotProduct1
 st.header("Fraction * V1 ")
 st.write(fractionMain*matrix1)
-st.header("V2 = ")
+st.header("V2 answer= ")
 v2 = matrix2 - (fractionMain*matrix1)
 st.write(v2)
 
@@ -220,7 +222,7 @@ st.header("Diagonaliser")
 
 
 
-test1 = st.text_input("Please enter the matrix 4", value=[[5,-2,-4],[-2,8,-2],[-4,-2,5]])
+test1 = st.text_input("Please enter the matrix 4", value=[[3,1,1,1], [1,3,1,1], [1,1,3,1],[1,1,1,3]])
 
 test1 = json.loads(test1)
 # vector5 = np.array(vector5).astype(np.float64)
@@ -230,3 +232,26 @@ A = Matrix(test1)
 p=A.charpoly().as_expr()
 # factor(p)
 st.write(factor(p))
+
+'''
+To find the eigenvectors
+'''
+# x1 = st.text_input("Please enter soemthing")
+
+trool = st.radio("Is there a 0 for one of the eigenvalues?","YN")
+if trool == "Y":
+    x = A.nullspace()
+    printer = StrPrinter()
+    st.write(x)
+    
+elif trool == "N":
+    nullspace = st.text_input("Please write the nullspace coeff out here")
+    nullspace = float((nullspace))
+    dimensions = st.text_input("Write the dimension of teh matrix")
+    dimensions = int(dimensions)
+    B = np.array(test1)
+    B = B-nullspace*np.eye(dimensions)
+    st.write(B)
+    # B = B.nullspace()
+    # st.write(B)
+    st.write(null_space(B))
