@@ -233,6 +233,9 @@ p=A.charpoly().as_expr()
 # factor(p)
 st.write(factor(p))
 
+
+st.subheader("The vector is ")
+st.write(np.array(test1))
 '''
 To find the eigenvectors
 '''
@@ -240,9 +243,9 @@ To find the eigenvectors
 
 trool = st.radio("Is there a 0 for one of the eigenvalues?","YN")
 if trool == "Y":
-    x = A.nullspace()
+    B = np.array(test1)
     printer = StrPrinter()
-    st.write(x)
+    st.write(null_space(B))
     
 elif trool == "N":
     nullspace = st.text_input("Please write the nullspace coeff out here")
