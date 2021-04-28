@@ -38,6 +38,8 @@ st.header("Formula for yield strength")
 def NerstEquation(voltage,numberofelectrons,numberofmoles):
     E = voltage + (0.0592/numberofelectrons*math.log10(numberofmoles))
     return E
+def getConcentrationNerst(voltage,numberofelectrons,E ):
+    return 10**(voltage + (0.0592/numberofelectrons))
 
 def enterVoltagesPlease(moletext):
     numberOxidised = st.text_input(moletext,value=1)
@@ -50,8 +52,13 @@ def enterVoltagesPlease(moletext):
     zach = st.radio("Is the reaction reversed?","YN")
     if zach == "Y":
         ans1 = -ans1
+        E = newStinput("Write E")
+        E = -E
+        st.write("If you are finding the number of moles of substance",getConcentrationNerst(numberOxidisedVoltage, electronsUsedO, E))
     if zach =="N":
         ans1 = ans1
+        E = newStinput("Write E")
+        st.write("If you are finding the number of moles of substance",getConcentrationNerst(numberOxidisedVoltage, electronsUsedO, E))
     return ans1
 
 st.header("Nerst equation")
@@ -65,11 +72,14 @@ V1 = NerstEquation(numberOxidisedVoltage, electronsUsedO, numberOxidised)
 zach = st.radio("Is the reaction reversed?ay","YN")
 if zach == "Y":
         V1 = -V1
+        E = newStinput("Write E")
+        E = -E
+        st.write("If you are finding the number of moles of substance",getConcentrationNerst(numberOxidisedVoltage, electronsUsedO, E))
 if zach =="N":
         V1 = V1
-    
-st.write("The answer is ", V1
-)
+        E = newStinput("Write E")
+        st.write("If you are finding the number of moles of substance",getConcentrationNerst(numberOxidisedVoltage, electronsUsedO, E))
+st.write("The answer is ", V1)
 V2 = enterVoltagesPlease("Enter the number of moles of the other substance please(reduced")
 st.write(V2)
 st.write("Total EMF is", V2+V1)
