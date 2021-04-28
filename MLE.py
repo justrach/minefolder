@@ -160,10 +160,10 @@ st.write(sigma2, "if you use the other formula")
 
 try:
     J = sigma*ew
-    st.write(J)
+    st.write("J is", J)
 except:
     J = sigma*Volt/d
-    st.write(J)
+    st.write("J is",J)
 
 st.write("Resistance is such that")
 
