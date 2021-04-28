@@ -123,3 +123,49 @@ if darth == "Y":
     CorrosionRates2(i,A, t, M, n)
 
 
+st.header("Quantum Mechanics")
+
+st.header("Conductivity and resistivity")
+'''
+J(current density)= Conductivity*Electric field applied
+
+I = JA
+
+'''
+
+I = newStinput("Enter teh current that is being used, I")
+J = newStinput("current density,J")
+A1 = newStinput("Cross sectional Area,A")
+sigma = newStinput("Conductivity σ [ohm/cm-1]")
+ew = newStinput("Electric field applied V/cm")
+Volt = newStinput("Voltage applied V")
+d = newStinput("distance over which the voltage is applied/cm")
+resistivity = newStinput("ρ resistivty [ohm cm]")
+number = newStinput("(conduction)electron concetration cm-3")
+p = newStinput("(valance hole concentration cm^-3)")
+qe = -1.602*10**-19
+st.write("qe/charge carried by one electron or hole [C]", qe)
+miuh = newStinput("Hole mobility")
+miue = newStinput("electron mobility unit is cm^2/Vs")
+Resistance = newStinput("resistance")
+
+
+
+sigma1 = 1/resistivity
+st.write("The conductivity is, please put it into sigma ", sigma1)
+
+st.write('sigma can also be')
+sigma2 = qe*number*miue + qe*p*miuh
+st.write(sigma2, "if you use the other formula")
+
+try:
+    J = sigma*ew
+    st.write(J)
+except:
+    J = sigma*Volt/d
+    st.write(J)
+
+st.write("Resistance is such that")
+
+Resistance = resistivity*d/A1
+st.write("Resistance is", Resistance)
