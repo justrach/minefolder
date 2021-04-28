@@ -6,3 +6,4 @@ streamlit==0.78.0
 wordcloud==1.8.1
 nltk==3.5
 sympy ==1.8
+scipy== 1.6.3
