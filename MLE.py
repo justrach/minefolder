@@ -2,7 +2,10 @@ import streamlit as st
 import math
 import scipy
 st.title("Weight average of Molecule")
-
+def newStinput(texthere):
+    text = st.text_input(texthere, value=1)
+    text = float(text)
+    return text
 '''
 <math><msub is="true"><mrow is="true"><mi is="true">M</mi></mrow><mrow is="true"><mi is="true">w</mi></mrow></msub><mrow is="true"><mo is="true">=</mo></mrow><mfrac is="true"><mrow is="true"><munder is="true"><mo is="true">∑</mo><mrow is="true"><mi is="true">i</mi></mrow></munder><mrow is="true"><msub is="true"><mrow is="true"><mi is="true">N</mi></mrow><mrow is="true"><mi is="true">i</mi></mrow></msub><msubsup is="true"><mrow is="true"><mi is="true">M</mi></mrow><mrow is="true"><mi is="true">i</mi></mrow><mrow is="true"><mn is="true">2</mn></mrow></msubsup></mrow></mrow><mrow is="true"><munder is="true"><mo is="true">∑</mo><mrow is="true"><mi is="true">i</mi></mrow></munder><mrow is="true"><msub is="true"><mrow is="true"><mi is="true">N</mi></mrow><mrow is="true"><mi is="true">i</mi></mrow></msub><msub is="true"><mrow is="true"><mi is="true">M</mi></mrow><mrow is="true"><mi is="true">i</mi></mrow></msub></mrow></mrow></mfrac></math>
 
@@ -38,8 +41,8 @@ st.header("Formula for yield strength")
 def NerstEquation(voltage,numberofelectrons,numberofmoles):
     E = voltage + (0.0592/numberofelectrons*math.log10(numberofmoles))
     return E
-def getConcentrationNerst(voltage,numberofelectrons,E ):
-    return 10**(voltage + (0.0592/numberofelectrons))
+def getConcentrationNerst(voltage,numberofelectrons,E):
+    return 10**((E - voltage)/(0.0592/numberofelectrons))
 
 def enterVoltagesPlease(moletext):
     numberOxidised = st.text_input(moletext,value=1)
@@ -52,12 +55,12 @@ def enterVoltagesPlease(moletext):
     zach = st.radio("Is the reaction reversed?","YN")
     if zach == "Y":
         ans1 = -ans1
-        E = newStinput("Write E")
+        E = newStinput("Write E1")
         E = -E
         st.write("If you are finding the number of moles of substance",getConcentrationNerst(numberOxidisedVoltage, electronsUsedO, E))
     if zach =="N":
         ans1 = ans1
-        E = newStinput("Write E")
+        E = newStinput("Write E3")
         st.write("If you are finding the number of moles of substance",getConcentrationNerst(numberOxidisedVoltage, electronsUsedO, E))
     return ans1
 
@@ -77,7 +80,7 @@ if zach == "Y":
         st.write("If you are finding the number of moles of substance",getConcentrationNerst(numberOxidisedVoltage, electronsUsedO, E))
 if zach =="N":
         V1 = V1
-        E = newStinput("Write E")
+        E = newStinput("Write E3")
         st.write("If you are finding the number of moles of substance",getConcentrationNerst(numberOxidisedVoltage, electronsUsedO, E))
 st.write("The answer is ", V1)
 V2 = enterVoltagesPlease("Enter the number of moles of the other substance please(reduced")
@@ -91,12 +94,19 @@ F = 96485.33212
 '''
 
 W = weightOfMetalCorroded
+
 I = Current Flow
+
 i = current density(A/cm2)
+
 M = atomic mass of metal
+
 n = number of electrons produced/consumed
+
 F = Faraday;s constant
+
 A = area(cm2)
+
 t = time(s)
 
 
@@ -107,10 +117,7 @@ def CorrosionRates(I,t,M,n):
 def CorrosionRates2(i,I,t,M,n):
     W = i*A*t*M/n*F
     return st.write("The coorosion rate is",W)
-def newStinput(texthere):
-    text = st.text_input(texthere, value=1)
-    text = float(text)
-    return text
+
 darth = st.radio("Is it in current density or current(N)?","YN")
 if darth == "N":
     A = st.text_input("A, current flow", value=1)
