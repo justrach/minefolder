@@ -92,15 +92,23 @@ elif page == "PNP BJT":
     format="%.5f")
     rC = st.number_input("""Enter rC""", value= 1.0,step=1e-6,
     format="%.5f")
+    bEta = st.number_input("""Enter beta""", value= 1.0,step=1e-6,
+    format="%.5f")
     st.write("Hello wrold")
     def voltageDividerPrinciple(vDD,r1,r2,rE,rC):
         st.write("Assuming fair split of currents")
         voltageFounded = eqparallelDivision(r1,r2) * vDD
         st.write(voltageFounded)
-        vb = st.number_input("""Enter vb""", value= 1.0,step=1e-6,
+        vb = st.number_input("""Enter vb""", value= voltageFounded,step=1e-6,
     format="%.5f")
-        return voltageFounded     
-    voltageDividerPrinciple(vDD,rOne,rTwo,rE,rC)
+        ve = vb + 0.7
+        iE = (vDD-ve)/rE
+        st.write("value of IE is " + str(iE))
+        ic = (bEta/(bEta+1)) * iE
+        return ic
+    ValueIC = voltageDividerPrinciple(vDD,rOne,rTwo,rE,rC)
+        #To get i_c you need to sub beta back into the equation
+    st.write("The value of ic is" + str(ValueIC))
         
 
 
