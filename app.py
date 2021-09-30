@@ -71,7 +71,7 @@ if page == "NPN BJT":
     st.write("Answer is "+ str(answerReturned))
     st.write(isAnswerValid(answerReturned))
     st.write("The ending to this is Point P is not within the forward active region, but at the verge of saturation, hence the small signal ac ic and vce will be distorted, and the amplifier will no longer work properly.")
-
+    st.write("Lol")
 
 elif page == "PNP BJT":
     st.write("Hello there")
@@ -80,18 +80,27 @@ elif page == "PNP BJT":
 
 
 # Basically what you do for PNP is the same as """)
-    st.write("Voltage Divider Principle")
+    st.write("Voltage Divider Principlé")
     rOne = st.number_input("""Enter r1(from above)""", value= 1.0,step=1e-6,
     format="%.5f")
+    st.write("Test")
     rTwo = st.number_input("""Enter r2(from above)""", value= 1.0,step=1e-6,
     format="%.5f")
-    vDD = st.number_input("""Enter vDD""", value= 1.0,step=1e-6,
+    vDD = st.number_input("""Enter vDR""", value= 1.0,step=1e-6,
     format="%.5f")
+    rE = st.number_input("""Enter re""", value= 1.0,step=1e-6,
+    format="%.5f")
+    rC = st.number_input("""Enter rC""", value= 1.0,step=1e-6,
+    format="%.5f")
+    st.write("Hello wrold")
     def voltageDividerPrinciple(vDD,r1,r2,rE,rC):
         st.write("Assuming fair split of currents")
         voltageFounded = eqparallelDivision(r1,r2) * vDD
         st.write(voltageFounded)
-        
+        vb = st.number_input("""Enter vb""", value= 1.0,step=1e-6,
+    format="%.5f")
+        return voltageFounded     
+    voltageDividerPrinciple(vDD,rOne,rTwo,rE,rC)
         
 
 
